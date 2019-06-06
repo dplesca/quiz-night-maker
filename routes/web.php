@@ -1,6 +1,7 @@
 <?php
 use App\Models\Round;
 use App\Models\Quiz;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +13,8 @@ use App\Models\Quiz;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+URL::forceScheme('https');
 
 Route::get('/', function () {
     $quizzes = Quiz::whereStatus('published')->get();
