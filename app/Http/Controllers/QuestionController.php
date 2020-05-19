@@ -56,7 +56,7 @@ class QuestionController extends Controller
         $type = $request->get('type');
         
         if ($type == 'text') {
-            $fields = $request->only(['question', 'answer']);
+            $fields = $request->only(['question', 'answer', 'image']);
             if ($request->has('question_id')) {
                 $q = Question::find($request->get('question_id'));
                 $q->update($fields);
@@ -77,7 +77,7 @@ class QuestionController extends Controller
             }
         }
 
-        return redirect('/round/' . $roundID);
+        return redirect('/admin/round/' . $roundID);
     }
 
     public function delete($qid, Request $request)
@@ -89,7 +89,7 @@ class QuestionController extends Controller
 
         Question::where('order', '>', $order)->decrement('order');
 
-        return redirect('/round/' . $roundID);
+        return redirect('/admin/round/' . $roundID);
     }
 
     public function deleteSong($qid, Request $request)
@@ -100,6 +100,6 @@ class QuestionController extends Controller
         $q->delete();
 
         Song::where('order', '>', $order)->decrement('order');
-        return redirect('/round/' . $roundID);
+        return redirect('/admin/round/' . $roundID);
     }
 }

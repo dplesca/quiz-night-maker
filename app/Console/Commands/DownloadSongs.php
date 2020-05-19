@@ -47,8 +47,8 @@ class DownloadSongs extends Command
 
         $tempLocation = storage_path();
         $finalLocation = public_path('songs/quiz-'. $quiz->id);
-        // dump($finalLocation);
-        // File::makeDirectory($finalLocation, 0644, true);
+        dump($finalLocation);
+        //File::makeDirectory($finalLocation, 0644, true);
         $this->line('Download songs for quiz: ' . $quiz->title);
         foreach ($quiz->rounds as $round){
             if ($round->type == 'song'){
@@ -65,17 +65,20 @@ class DownloadSongs extends Command
                         $this->error('download for ' . $song->youtube_id . ' failed');
                     }
                     $this->line('Cut to duration for: ' . $song->artist . ' - ' . $song->song);
-                    $cutProcess = new Process([
+                    $params = [
                         "ffmpeg",
                         "-i", $song->youtube_id.".m4a",
                         "-ss", $song->start,
                         "-t", $song->duration,
                         "-y", $finalLocation . '/' . $song->youtube_id . '.mp3',
-                    ]);
+                    ];
+                    $this->line(implode(" ", $params));
+                    $cutProcess = new Process($params);
                     $cutProcess->run();
                     $this->line('Finished: ' . $song->artist . ' - ' . $song->song);
                     //delete m4a file
                     unlink($song->youtube_id.".m4a");
+                    //exit;
                 }
             }
         }

@@ -18,7 +18,14 @@
                 @foreach ($round->questions as $question)
 				<section>
                     <small>{{$round->quiz->title}} - Round {{$round->order}}: {{$round->title}}</small>
+                    @if ($question->question !== "-")
                     <h3>{{$question->question}}</h3>
+                    @else
+                    <br />
+                    @endif
+                    @if ($question->image)
+                    <img src="{{$question->image}}" alt="question {{$question->id}}" height="400">
+                    @endif
                     @if ($type == 'answers')
                     <h4 class="answer">Raspuns: <a href="#">{{$question->answer}}</a></h4>
                     @endif

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     protected $table = "questions";
-    public $fillable = ['question', 'answer', 'round_id', 'order'];
+    public $fillable = ['question', 'answer', 'round_id', 'order', 'image'];
 
     public function round()
     {

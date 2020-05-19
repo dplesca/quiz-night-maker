@@ -28,7 +28,7 @@ class RoundController extends Controller
         $values = $request->only(['title', 'type', 'quiz_id']);
         $round = new Round($values);
         $round->save();
-        return redirect('/quiz/' . $quizID);
+        return redirect('/admin/quiz/' . $quizID);
     }
 
     public function round($id, Request $request)
@@ -43,6 +43,6 @@ class RoundController extends Controller
         $quizID = $q->quiz_id;
         $q->delete();
 
-        return redirect('/quiz/' . $quizID);
+        return redirect('/admin/quiz/' . $quizID);
     }
 }

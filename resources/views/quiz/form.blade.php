@@ -23,7 +23,13 @@
                     <div class="col-9">
                         <textarea id="question" name="question" cols="40" rows="3" class="form-control" required="required">@if (isset($question)){{$question->question}}@endif</textarea>
                     </div>
-                </div> 
+                </div>
+                <div class="form-group row">
+                    <label for="image" class="col-3 col-form-label">Image</label> 
+                    <div class="col-9">
+                        <input id="image" name="image" type="text" class="form-control" value="@if (isset($question)){{$question->image}}@endif">
+                    </div>
+                </div>
                 <div class="form-group row">
                     <label for="answer" class="col-3 col-form-label">Answer</label> 
                     <div class="col-9">
